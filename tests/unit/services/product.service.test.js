@@ -33,8 +33,9 @@ describe('Testes Service Products', function () {
       expect(result.message).to.deep.equal('"id" must be a number');
     })
     it('Buscando um produto através de id não existente', async function () {
+      sinon.stub(productModel, 'findById').resolves();
       // act
-      const result = await productService.findById(4);
+      const result = await productService.findById(999);
       // assert
       expect(result.type).to.equal('PRODUCT_NOT_FOUND');
       expect(result.message).to.deep.equal('Product not found');

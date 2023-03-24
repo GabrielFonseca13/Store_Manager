@@ -71,8 +71,8 @@ describe('Testes unitários de Product Controller', function () {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
 
-      // sinon.stub(productService, 'findById')
-      //   .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+      sinon.stub(productService, 'findById')
+        .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
       // act
       await productController.getProduct(req, res);
       // assert
