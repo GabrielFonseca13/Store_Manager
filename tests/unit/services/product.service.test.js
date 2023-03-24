@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 
 const { productService } = require('../../../src/services');
-const { productList, invalidValue } = require('./mocks/product.service.mock');
+const { productList, invalidValue, newProduct, newProductMock } = require('./mocks/product.service.mock');
 
 describe('Testes Service Products', function () {
   describe('Listando os produtos', function () {
@@ -40,6 +40,32 @@ describe('Testes Service Products', function () {
       expect(result.type).to.equal('PRODUCT_NOT_FOUND');
       expect(result.message).to.deep.equal('Product not found');
     })
+  });
+  describe('cadastro de um produto com valores válidos', function () {
+    it('retorna o ID e o produto cadastrado', async function () {
+      // arrange
+      sinon.stub(productModel, 'insert').resolves(4);
+      sinon.stub(productModel, 'findById').resolves(newProductMock);
+      
+      // act
+      const result = await productService.createProduct(newProduct);
+
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(newProductMock);
+    });
+  });
+  describe('cadastro de um novo produto com valores inválidos', function () {
+    it('retorna um erro ao passar um nome inválido', async function () {
+      // arrange: Novamente não precisamos de um arranjo pois esse é um fluxo que não chama o model!
+
+      // act
+      const result = await productService.createProduct(invalidValue);
+
+      // assert
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.equal('"name" length must be at least 5 characters long');
+    });
   });
   afterEach(function () {
     sinon.restore()

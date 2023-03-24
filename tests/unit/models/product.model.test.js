@@ -26,7 +26,7 @@ describe('Testes da Model Products', function () {
       expect(result).to.be.deep.equal(productList[0]);
     })
   describe('Cadastrando um novo produto', function () {
-    it.only('Cadastrando um produto com dados válidos', async function () {
+    it('Cadastrando um produto com dados válidos', async function () {
       // Arrange
       sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
       // Act
