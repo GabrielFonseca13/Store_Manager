@@ -4,6 +4,11 @@ const productList = [
   { id: 3, name: 'Escudo do Capitão América' },
 ];
 
+const newProduct = {
+  name: 'Manopla do infinito'
+}
+
 module.exports = {
   productList,
+  newProduct
 }
