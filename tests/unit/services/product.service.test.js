@@ -36,7 +36,7 @@ describe('Testes Service Products', function () {
       const result = await productService.findById(invalidValue);
       // assert
       expect(result.type).to.equal('INVALID_VALUE');
-      expect(result.message).to.deep.equal({ message:'"id" must be a number' });
+      expect(result.message).to.deep.equal('"id" must be a number');
     })
     it('Buscando um produto através de id não existente', async function () {
       sinon.stub(productModel, 'findById').resolves();

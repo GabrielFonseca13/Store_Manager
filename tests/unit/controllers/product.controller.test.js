@@ -60,7 +60,7 @@ describe('Testes unitários de Product Controller', function () {
       await productController.getProduct(req, res);
       // assert
       expect(res.status).to.have.been.calledWith(422);
-      expect(res.json).to.have.been.calledWith('"id" must be a number');
+      expect(res.json).to.have.been.calledWith({message: '"id" must be a number'});
     });
     it('Buscando um produto com id inexistente', async function () {
       const res = {};
@@ -77,7 +77,7 @@ describe('Testes unitários de Product Controller', function () {
       await productController.getProduct(req, res);
       // assert
       expect(res.status).to.have.been.calledWith(404);
-      expect(res.json).to.have.been.calledWith('Product not found');
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
     afterEach(function() {
       sinon.restore();
