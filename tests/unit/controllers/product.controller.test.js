@@ -4,7 +4,7 @@ const sinonChai = require('sinon-chai');
 const { productController } = require('../../../src/controllers');
 const { listProducts } = require('../../../src/controllers/product.controller');
 const { productService } = require('../../../src/services');
-const { productList, invalidValue } = require('./mocks/product.controller.mock');
+const { productList, invalidValue, newProduct, newProductMock } = require('./mocks/product.controller.mock');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -60,7 +60,7 @@ describe('Testes unitários de Product Controller', function () {
       await productController.getProduct(req, res);
       // assert
       expect(res.status).to.have.been.calledWith(422);
-      expect(res.json).to.have.been.calledWith({ message: '"id" must be a number' });
+      expect(res.json).to.have.been.calledWith('"id" must be a number');
     });
     it('Buscando um produto com id inexistente', async function () {
       const res = {};
@@ -77,9 +77,58 @@ describe('Testes unitários de Product Controller', function () {
       await productController.getProduct(req, res);
       // assert
       expect(res.status).to.have.been.calledWith(404);
-      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+      expect(res.json).to.have.been.calledWith('Product not found');
     });
     afterEach(function() {
+      sinon.restore();
+    });
+  });
+  describe('Cadastrando um novo produto', function () {
+    it('ao enviar dados válidos deve salvar com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      const req = {
+        body: newProduct,
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      
+      sinon
+        .stub(productService, 'createProduct')
+        .resolves({ type: null, message: newProductMock });
+
+      // Act
+      await productController.createProduct(req, res);
+
+      // Assert
+      
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProductMock);
+    });
+    it('ao enviar dados inválidos deve retornar erro', async function () {
+      // Arrange
+      const res = {};
+      const req = {
+        body: {name: invalidValue}
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      
+      sinon
+        .stub(productService, 'createProduct')
+        .resolves({ type: 'INVALID_VALUE', message: '"name" length must be at least 5 characters long' });
+
+      // Act
+      await productController.createProduct(req, res);
+
+      // Assert
+      
+      expect(res.status).to.have.been.calledWith(422);
+      expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long'});
+    });
+    afterEach(function () {
       sinon.restore();
     });
   });

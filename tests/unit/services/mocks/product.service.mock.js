@@ -8,7 +8,7 @@ const productList = [
 
 const newProduct = 'Manopla do Infinito';
 
-const newProductMock = {
+const newProductMockResponse = {
   id: 4,
   name: newProduct,
 }
@@ -17,5 +17,5 @@ module.exports = {
   productList,
   invalidValue,
   newProduct,
-  newProductMock
+  newProductMockResponse
 }

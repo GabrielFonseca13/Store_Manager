@@ -6,7 +6,13 @@ const productList = [
   { id: 3, name: 'Escudo do Capitão América' },
 ];
 
+const newProduct = 'Manopla do infinito';
+
+const newProductMock = { id: 1, name: newProduct };
+
 module.exports = {
   productList,
   invalidValue,
+  newProduct,
+  newProductMock,
 }
