@@ -6,7 +6,6 @@ const { productService } = require('../../../src/services');
 const {
   productList,
   invalidValue,
-  newProductMock,
   newProductMockResponse,
   newProduct
 } = require('./mocks/product.service.mock');

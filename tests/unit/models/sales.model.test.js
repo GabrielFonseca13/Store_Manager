@@ -15,5 +15,8 @@ describe('Testes da Sales Model', () => {
       expect(result).to.equal(3)
     });
   });
+  afterEach(function () {
+    sinon.restore();
+  })
 });
 
