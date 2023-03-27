@@ -11,6 +11,7 @@ const newSalePost = async (salesProducts) => {
   await Promise.all(
     salesProducts.map(async (saleProduct) => {
       const { productId, quantity } = saleProduct;
+      // await productModel.findById(productId);
       await salesProductsModel.insert({ saleId: newSale, productId, quantity });
     }), 
   );
