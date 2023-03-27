@@ -11,10 +11,8 @@ describe('Testando a service de Sales', function () {
       // arrange
       sinon.stub(salesModel, 'insert').resolves(newSaleId);
       sinon.stub(salesProductsModel, 'insert')
-        .onFirstCall()
-          .resolves()
-        .onSecondCall()
-          .resolves();
+        .onFirstCall().resolves(1)
+        .onSecondCall().resolves(1);
 
       // act
       const result = await salesService.newSalePost(itemsSold);

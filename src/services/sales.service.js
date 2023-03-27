@@ -1,7 +1,11 @@
 const { salesModel, salesProductsModel } = require('../models');
+const { validateNewSale } = require('./validations/validationsInputs');
 
 const newSalePost = async (salesProducts) => {
   // TODO criar validações
+  const error = validateNewSale(salesProducts);
+  if (error.type) return error; 
+    
   const newSale = await salesModel.insert();
   
   await Promise.all(
@@ -15,7 +19,7 @@ const newSalePost = async (salesProducts) => {
     id: newSale,
     itemsSold: salesProducts,
   };      
-
+  
   return { type: null, message: response };
 };
 

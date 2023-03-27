@@ -1,4 +1,4 @@
-const { idSchema, addProductSchema } = require('./schema');
+const { idSchema, addProductSchema, addNewSaleSchema } = require('./schema');
 
 const validateId = (id) => {
   const { error } = idSchema.validate(id);
@@ -14,7 +14,16 @@ const validateNewProduct = (name) => {
   return { type: null, message: '' };
 };
 
+const validateNewSale = (arraySalesReq) => {
+  const invalidItem = arraySalesReq.find((item) => item.quantity <= 0);
+  if (invalidItem) {
+    return { type: 'INVALID_VALUE', message: '"quantity" must be greater than or equal to 1' };
+  } 
+  return { type: null, message: '' };
+};
+
 module.exports = {
   validateId,
   validateNewProduct,
+  validateNewSale,
 };

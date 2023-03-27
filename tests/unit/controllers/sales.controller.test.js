@@ -9,7 +9,7 @@ chai.use(sinonChai);
 
 describe('Testes Sales Controller', function () {
   describe('Cadastrando uma nova venda', function () {
-    it.only('com dados válidos', async function () {
+    it('com dados válidos', async function () {
       const res = {};
       const req = {
         body: itemsSold,
