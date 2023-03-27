@@ -1,12 +1,16 @@
 const express = require('express');
 const { salesController } = require('../controllers');
-const validatenewSaleFields = require('../middlewares/validatenewSaleFields');
-// const validateNewProduct = require('../middlewares/validateNewProduct');
+const validateHasProductId = require('../middlewares/validateHasProductId');
+const validateHasQuantity = require('../middlewares/validateHasQuantity');
+// const validatenewSaleFields = require('../middlewares/validatenewSaleFields');
+const validateQuantity = require('../middlewares/validateQuantity');
 
 const router = express.Router();
 
 router.post('/',
-  validatenewSaleFields,
+  validateHasProductId,
+  validateHasQuantity,
+  validateQuantity,
   salesController.insertNewSale);
 
 module.exports = router;

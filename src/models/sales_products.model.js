@@ -5,7 +5,7 @@ const insert = async ({ saleId, productId, quantity }) => {
     'INSERT INTO sales_products (sale_id, product_id, quantity) VALUE (?,?,?);',
     [saleId, productId, quantity],
   );
-
+  
   return affectedRows;
 };
 
