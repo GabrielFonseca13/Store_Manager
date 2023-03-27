@@ -1,17 +1,18 @@
 const { salesModel, salesProductsModel } = require('../models');
-const { validateNewSale } = require('./validations/validationsInputs');
+const { validateNewSale, validateProductExists } = require('./validations/validationsInputs');
 
 const newSalePost = async (salesProducts) => {
   // TODO criar validações
-  const error = validateNewSale(salesProducts);
+  let error = validateNewSale(salesProducts);
   if (error.type) return error; 
-    
+  error = await validateProductExists(salesProducts);
+  if (error.type) return error; 
+  
   const newSale = await salesModel.insert();
   
   await Promise.all(
     salesProducts.map(async (saleProduct) => {
       const { productId, quantity } = saleProduct;
-      // await productModel.findById(productId);
       await salesProductsModel.insert({ saleId: newSale, productId, quantity });
     }), 
   );
