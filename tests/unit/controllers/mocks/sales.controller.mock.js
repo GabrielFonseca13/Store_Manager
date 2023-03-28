@@ -25,8 +25,30 @@ const expectedRetundNewSalePost = {
   ]
 };
 
+const itemsSoldWithoutProductId = [
+  {
+    'quantity': 1
+  },
+  {
+    'productId': 2,
+    'quantity': 5
+  }
+];
+
+const itemsSoldWithoutQuantity = [
+  {
+    'productId': 1,
+  },
+  {
+    'productId': 2,
+    'quantity': 5
+  }
+];
+
 module.exports = {
   newSaleId,
   itemsSold,
-  expectedRetundNewSalePost
+  expectedRetundNewSalePost,
+  itemsSoldWithoutProductId,
+  itemsSoldWithoutQuantity
 }

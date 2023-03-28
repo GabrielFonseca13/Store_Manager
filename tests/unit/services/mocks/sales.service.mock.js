@@ -31,10 +31,18 @@ const productList = [
   { id: 3, name: 'Escudo do Capitão América' },
 ];
 
+const itemsSoldWithWrongId = [
+  {
+    'productId': 999,
+    'quantity': 1
+  }
+];
+
 module.exports = {
   newSaleId,
   itemsSold,
   expectedReturnNewSalePost,
-  productList
+  productList,
+  itemsSoldWithWrongId,
 }
 

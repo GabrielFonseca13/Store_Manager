@@ -2,14 +2,16 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const { salesController } = require('../../../src/controllers');
+const validateHasProductId = require('../../../src/middlewares/validateHasProductId');
+const validateQuantity = require('../../../src/middlewares/validateQuantity');
 const { salesService } = require('../../../src/services');
-const { itemsSold, expectedRetundNewSalePost } = require('./mocks/sales.controller.mock');
+const { itemsSold, expectedRetundNewSalePost, itemsSoldWithoutProductId } = require('./mocks/sales.controller.mock');
 const { expect } = chai;
 chai.use(sinonChai);
 
 describe('Testes Sales Controller', function () {
-  describe('Cadastrando uma nova venda', function () {
-    it('com dados válidos', async function () {
+  describe('Cadastrando uma nova venda com dados válidos', function () {
+    it('retorna o status 201 e o objeto de resposta completo', async function () {
       const res = {};
       const req = {
         body: itemsSold,
@@ -28,6 +30,47 @@ describe('Testes Sales Controller', function () {
       expect(res.json).to.have.been.calledWith(expectedRetundNewSalePost);
     });
   });
+    describe('Cadastrando uma nova venda faltando dados obrigatórios', function () {
+      it('Cadastrando sem productId retorna o status 400 e a mensagem productId is required', async function () {
+        const res = {};
+        const req = {
+          body: [
+            {
+              'quantity': 1
+            }
+          ]
+        };
+          
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+              
+        await validateHasProductId(req, res);
+
+        expect(res.status).to.have.been.calledWith(400);
+        expect(res.json).to.have.been.calledWith({ "message": '"productId" is required' });
+      });
+    });
+    describe('Cadastrando uma nova venda com dados do campo quantity inválidos', function () {
+      it('Cadastrando com quantity 0', async function () {
+        const res = {};
+        const req = {
+          body: [
+            {
+              'productId': 1,
+              'quantity': 0
+            }
+          ]
+        };
+          
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+              
+        await validateQuantity(req, res);
+
+        expect(res.status).to.have.been.calledWith(422);
+        expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
+      });
+    });
   afterEach(function() {
     sinon.restore();
   })
