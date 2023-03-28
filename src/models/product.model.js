@@ -14,6 +14,7 @@ const findById = async (productId) => {
     'SELECT * FROM products WHERE id = ?',
     [productId],
   );
+  console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PRODUCT', product);
   return camelize(product);
 };
 

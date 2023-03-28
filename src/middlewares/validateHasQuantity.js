@@ -1,5 +1,6 @@
 module.exports = (req, res, next) => {
   const itemsSold = req.body;
+  
   const quantity = [];
   
   itemsSold.forEach((itemSold) => {

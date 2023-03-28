@@ -1,3 +1,4 @@
+const { productModel } = require('../../models');
 const { idSchema, addProductSchema } = require('./schema');
 
 const validateId = (id) => {
@@ -14,8 +15,19 @@ const validateNewProduct = (name) => {
   return { type: null, message: '' };
 };
 
+const validateProductExists = async (salesProducts) => {
+  const products = await Promise.all(
+    salesProducts.map(async ({ productId }) => productModel.findById(productId)),
+    );
+    
+  const someProductIsMissing = products.some((product) => product === undefined);
+  if (someProductIsMissing) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' }; 
+  
+  return { type: null, message: '' };
+  };
+
 module.exports = {
   validateId,
   validateNewProduct,
-
+  validateProductExists,
 };

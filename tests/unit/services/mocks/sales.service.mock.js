@@ -11,23 +11,30 @@ const itemsSold = [
 ];
 
 
-const expectedRetundNewSalePost = {
-  'id': 3,
-  'itemsSold': [
+const expectedReturnNewSalePost = {
+  "id": 3,
+  "itemsSold": [
     {
-      'productId': 1,
-      'quantity': 1
+      "productId": 1,
+      "quantity": 1
     },
     {
-      'productId': 2,
-      'quantity': 5
+      "productId": 2,
+      "quantity": 5
     }
   ]
 };
 
+const productList = [
+  { id: 1, name: 'Martelo de Thor' },
+  { id: 2, name: 'Traje de encolhimento' },
+  { id: 3, name: 'Escudo do Capitão América' },
+];
+
 module.exports = {
   newSaleId,
   itemsSold,
-  expectedRetundNewSalePost,
+  expectedReturnNewSalePost,
+  productList
 }
 
