@@ -73,14 +73,23 @@ describe('Testando a service de Sales', function () {
       expect(result.type).to.equal(null);
       expect(result.message).to.deep.equal(allSalesMock);
     });
-       it('Buscando uma venda atraves de id válido', async function () {
-         // arrange
-         sinon.stub(salesModel, 'getDetailedSalesById').resolves(expectedResponseSaleById);
-         // act      
-         const result = await salesService.getDetailedSalesById(1);
-         // assert
-         expect(result.type).to.equal(null);
-         expect(result.message).to.deep.equal(expectedResponseSaleById);
+    it('Buscando uma venda atraves de id válido', async function () {
+      // arrange
+      sinon.stub(salesModel, 'getDetailedSalesById').resolves(expectedResponseSaleById);
+      // act      
+      const result = await salesService.getDetailedSalesById(1);
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(expectedResponseSaleById);
+    });
+    it('Buscando uma venda atraves de id de venda inexistente', async function () {
+      // arrange
+      sinon.stub(salesModel, 'getDetailedSalesById').resolves([]);
+      // act      
+      const result = await salesService.getDetailedSalesById(999);
+      // assert
+      expect(result.type).to.equal('SALE_NOT_FOUND');
+      expect(result.message).to.deep.equal('Sale not found');
     });
   });
   afterEach(function () {

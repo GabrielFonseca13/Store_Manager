@@ -106,6 +106,24 @@ describe('Testes Sales Controller', function () {
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(expectedResponseSaleById);
     });
+    it('Busca uma venda pelo seu id de uma venda inexistente', async function () {
+      // arrange
+      const res = {};
+      const req = {
+        params: { id: 999 }
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(salesService, 'getDetailedSalesById')
+        .resolves({ type: 'SALE_NOT_FOUND', message: 'Sale not found' });
+      // act
+      await salesController.getDetailedSalesById(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+    });
   });
   
   afterEach(function() {
