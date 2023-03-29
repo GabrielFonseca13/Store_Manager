@@ -72,24 +72,26 @@ describe('Testes Sales Controller', function () {
       });
   });
   describe('Cadastrando uma nova venda com id inexistente', function () {
-      it('Cadastrando com quantity 0', async function () {
+      it('Retorna erro 404 e mensagem product not found', async function () {
         const res = {};
         const req = {
           body: [
             {
-              'productId': 1,
-              'quantity': 0
+              'productId': 999,
+              'quantity': 5
             }
           ]
         };
           
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns();
-              
-        await validateQuantity(req, res);
+        sinon.stub(salesService, 'newSalePost')
+          .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+        
+        await salesController.insertNewSale(req, res);
 
-        expect(res.status).to.have.been.calledWith(422);
-        expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
+        expect(res.status).to.have.been.calledWith(404);
+        expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
       });
   });
   describe('Listando as vendas', function () {
