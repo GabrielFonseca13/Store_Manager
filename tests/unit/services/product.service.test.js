@@ -87,7 +87,7 @@ describe('Testes Service Products', function () {
       const result = await productService.updateProduct(newProduct, 1);
       // assert
       expect(result.type).to.equal(null);
-      expect(result.message).to.deep.equal(expectedUpdateResponse);
+      expect(result.message).to.deep.equal(productList[0]);
     });
     it('com name inválido', async function () {
       // arrange
