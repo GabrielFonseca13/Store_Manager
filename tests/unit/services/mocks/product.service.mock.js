@@ -8,14 +8,20 @@ const productList = [
 
 const newProduct = 'Manopla do Infinito';
 
+const expectedUpdateResponse = {
+  id: 1,
+  name: newProduct
+};
+
 const newProductMockResponse = {
   id: 4,
   name: newProduct,
-}
+};
 
 module.exports = {
   productList,
   invalidValue,
   newProduct,
-  newProductMockResponse
+  newProductMockResponse,
+  expectedUpdateResponse,
 }

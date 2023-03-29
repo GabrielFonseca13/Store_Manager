@@ -5,10 +5,14 @@ const productList = [
 ];
 
 const newProduct = {
-  name: 'Manopla do infinito'
+  name: 'Manopla do infinito',
+  id: 1,
 }
+
+const newName = 'Martelo do Chapolin';
 
 module.exports = {
   productList,
-  newProduct
-}
+  newProduct,
+  newName
+};

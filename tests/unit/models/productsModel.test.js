@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 
 const connection = require('../../../src/models/connection');
-const { productList, newProduct } = require('./mocks/product.model.mock');
+const { productList, newProduct, newName } = require('./mocks/product.model.mock');
 
 describe('Testes da Model Products', function () {
   describe('Listando produtos', function () {
@@ -33,6 +33,17 @@ describe('Testes da Model Products', function () {
       const result = await productModel.insert(newProduct);
       // Assert
       expect(result).to.equal(4);
+    });
+  });
+  describe('Cadastrando um novo produto', function () {
+    it('Atualizando o nome de um produto com dados válidos', async function () {
+      // Arrange
+      sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+      // Act
+      const result = await productModel.update(newName, 1);
+      console.log('########################################33333', result);
+      // Assert
+      expect(result).to.equal(1);
     });  
   })
   });

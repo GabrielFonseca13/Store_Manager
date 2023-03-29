@@ -1,13 +1,14 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { productModel } = require('../../../src/models');
+const { productModel, salesModel } = require('../../../src/models');
 
 const { productService } = require('../../../src/services');
 const {
   productList,
   invalidValue,
   newProductMockResponse,
-  newProduct
+  newProduct,
+  expectedUpdateResponse
 } = require('./mocks/product.service.mock');
 
 describe('Testes Service Products', function () {
@@ -78,6 +79,27 @@ describe('Testes Service Products', function () {
       expect(result.message).to.equal('"name" is required');
     });
   });
+  describe('Atualizando um produto', function () {
+    it('com Id válido', async function () {
+      // arrange
+      sinon.stub(productModel, 'update').resolves(expectedUpdateResponse)
+      // act
+      const result = await productService.updateProduct(newProduct, 1);
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(expectedUpdateResponse);
+    });
+    it.only('com Id inexistente', async function () {
+      // arrange
+      sinon.stub(productModel, 'update').resolves();
+      // act
+      const result = await productService.updateProduct(newProduct, 999);
+      console.log('#########################', result)
+      // assert
+      expect(result.type).to.equal('PRODUCT_NOT_FOUND');
+      expect(result.message).to.deep.equal('Product not found');
+    })
+  })
   afterEach(function () {
     sinon.restore()
   });
