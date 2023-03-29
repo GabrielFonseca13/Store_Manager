@@ -1,6 +1,5 @@
 const { salesModel, salesProductsModel } = require('../models');
 const { validateProductExists } = require('./validations/validationsInputs');
-const schema = require('./validations/validationsInputs');
 
 const newSalePost = async (salesProducts) => {
   const error = await validateProductExists(salesProducts);
@@ -29,12 +28,9 @@ const getAllDetailedSales = async () => {
 };
 
 const getDetailedSalesById = async (saleId) => {
-  const error = schema.validateId(saleId);
-  if (error.type) return error;
-
   const sale = await salesModel.getDetailedSalesById(saleId);
-
-  if (!sale) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  
+  if (!sale.length) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
 
   return { type: null, message: sale };
 };

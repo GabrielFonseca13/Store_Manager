@@ -14,6 +14,6 @@ router.post('/',
 
 router.get('/', salesController.getAllDetailedSales);
 
-// router.get('/:id', salesController.getSaleById);
+router.get('/:id', salesController.getDetailedSalesById);
 
 module.exports = router;

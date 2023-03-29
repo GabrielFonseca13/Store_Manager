@@ -88,7 +88,7 @@ describe('Testes Sales Controller', function () {
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(allSalesMock);
     });
-    it.only('Busca uma venda pelo seu id', async function () {
+    it('Busca uma venda pelo seu id', async function () {
       // arrange
       const res = {};
       const req = {

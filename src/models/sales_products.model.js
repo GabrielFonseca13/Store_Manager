@@ -9,24 +9,6 @@ const insert = async ({ saleId, productId, quantity }) => {
   return affectedRows;
 };
 
-// const findAll = async () => {
-//   const [result] = await connection.execute(
-//     'SELECT * FROM sales_products;',
-//   );
-//   return camelize(result);
-// };
-
-// const findById = async (saleId) => {
-//   const [saleProduct] = await connection.execute(
-//     'SELECT * FROM sales_products where sale_id = ?',
-//     [saleId],
-//   );
-
-//   return camelize(saleProduct);
-// };
-
 module.exports = {
   insert,
-  // findAll,
-  // findById,
 };

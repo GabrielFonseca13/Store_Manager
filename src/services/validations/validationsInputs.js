@@ -25,7 +25,7 @@ const validateProductExists = async (salesProducts) => {
   
   return { type: null, message: '' };
   };
-
+  
 module.exports = {
   validateId,
   validateNewProduct,

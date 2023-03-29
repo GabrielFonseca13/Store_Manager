@@ -23,8 +23,7 @@ const getDetailedSales = async () => {
 
 const getDetailedSalesById = async (id) => {
   const [result] = await connection.execute(`
-    SELECT SP.sale_id AS "saleId", 
-      S.date AS "date", 
+    SELECT S.date AS "date", 
       SP.product_id AS "productId", 
       SP.quantity AS "quantity"
     FROM sales_products AS SP
