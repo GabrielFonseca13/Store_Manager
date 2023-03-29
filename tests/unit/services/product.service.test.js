@@ -89,16 +89,25 @@ describe('Testes Service Products', function () {
       expect(result.type).to.equal(null);
       expect(result.message).to.deep.equal(expectedUpdateResponse);
     });
-    it.only('com Id inexistente', async function () {
+    it('com name inválido', async function () {
+      // arrange
+      sinon.stub(productModel, 'update').resolves();
+      // act
+      const result = await productService.updateProduct(invalidValue, 1);
+      console.log('#########################', result)
+      // assert
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.deep.equal('"name" length must be at least 5 characters long');
+    });
+    it('com Id inexistente', async function () {
       // arrange
       sinon.stub(productModel, 'update').resolves();
       // act
       const result = await productService.updateProduct(newProduct, 999);
-      console.log('#########################', result)
       // assert
       expect(result.type).to.equal('PRODUCT_NOT_FOUND');
       expect(result.message).to.deep.equal('Product not found');
-    })
+    });
   })
   afterEach(function () {
     sinon.restore()

@@ -23,16 +23,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/product Copy",
-    "url": "http://localhost:3001/sales/999",
-    "method": "GET",
+    "url": "http://localhost:3001/products/1",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-03-24T13:44:09.692Z",
-    "modified": "2023-03-29T18:51:50.700Z",
+    "modified": "2023-03-29T20:01:45.337Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n    \"productId\": 2,\n    \"quantity\": 1\n  },\n   {\n    \"productId\": 1,\n    \"quantity\": 15\n  }\n]",
+      "raw": "{\n  \"name\": \"Chapeu do Cauboi\"\n}",
       "form": []
     },
     "tests": []
@@ -66,6 +66,25 @@
     "body": {
       "type": "json",
       "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": -5\n  },\n   {\n    \"productId\": 1,\n    \"quantity\": 15\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "56d72729-40ca-4fc2-8679-736a98891f33",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/product Copy Copy",
+    "url": "http://localhost:3001/sales/999",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-24T13:44:09.692Z",
+    "modified": "2023-03-29T18:51:50.700Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 2,\n    \"quantity\": 1\n  },\n   {\n    \"productId\": 1,\n    \"quantity\": 15\n  }\n]",
       "form": []
     },
     "tests": []

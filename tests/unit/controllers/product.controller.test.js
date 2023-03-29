@@ -128,8 +128,46 @@ describe('Testes unitários de Product Controller', function () {
       expect(res.status).to.have.been.calledWith(422);
       expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long'});
     });
-    afterEach(function () {
-      sinon.restore();
+  });
+  describe('Atualizado os dados de um produto', function () {
+    it('Com id válido', async function () {
+      const res = {};
+      const req = {
+        params: { id: 1 },
+        body: { name: newProduct}
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productService, 'updateProduct')
+        .resolves({ type: null, message: newProductMock });
+      // act
+      await productController.updatedProduct(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(newProductMock);
     });
+    it('Com id inválido', async function () {
+      const res = {};
+      const req = {
+        params: { id: 999 },
+        body: { name: newProduct}
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productService, 'updateProduct')
+        .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+      // act
+      await productController.updatedProduct(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+  });
+  afterEach(function () {
+    sinon.restore();
   });
 });

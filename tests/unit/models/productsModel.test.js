@@ -41,7 +41,6 @@ describe('Testes da Model Products', function () {
       sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
       // Act
       const result = await productModel.update(newName, 1);
-      console.log('########################################33333', result);
       // Assert
       expect(result).to.equal(1);
     });  
