@@ -18,24 +18,6 @@ describe('Testes da SalesProducts Model', () => {
       expect(result).to.equal(1)
     });
   });
-  // describe('Listando todas as vendas com quantidades', function() {
-  //   it('retorna um array com todas as vendas e os produtos e quantidade', async function() {
-  //     // arrange
-  //     sinon.stub(connection, 'execute').resolves([allSalesMock]);
-  //     // act
-  //     const result = await salesProductsModel.findAll();
-  //     // assert
-  //     expect(result).to.deep.equal(allSalesMock);
-  //   });
-  //     it('retorna as vendas, os produtos e quantidade através do id', async function () {
-  //     // arrange
-  //     sinon.stub(connection, 'execute').resolves([responseId]);
-  //     // act
-  //     const result = await salesProductsModel.findById(1);
-  //     // assert
-  //     expect(result).to.be.deep.equal(responseId);
-  //   })
-  // });
   afterEach(function () {
     sinon.restore();
   })

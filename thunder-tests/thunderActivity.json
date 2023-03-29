@@ -23,18 +23,13 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/product Copy",
-    "url": "http://localhost:3001/products/1",
-    "method": "PUT",
+    "url": "http://localhost:3001/products/3",
+    "method": "DELETE",
     "sortNum": 0,
     "created": "2023-03-24T13:44:09.692Z",
-    "modified": "2023-03-29T20:01:45.337Z",
+    "modified": "2023-03-29T21:28:52.569Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"Chapeu do Cauboi\"\n}",
-      "form": []
-    },
     "tests": []
   },
   {
@@ -85,6 +80,25 @@
     "body": {
       "type": "json",
       "raw": "[\n  {\n    \"productId\": 2,\n    \"quantity\": 1\n  },\n   {\n    \"productId\": 1,\n    \"quantity\": 15\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f11183fd-b88b-48ba-95f0-92aca3dd0923",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/product Copy Copy",
+    "url": "http://localhost:3001/products/1",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-03-24T13:44:09.692Z",
+    "modified": "2023-03-29T20:01:45.337Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Chapeu do Cauboi\"\n}",
       "form": []
     },
     "tests": []

@@ -167,6 +167,58 @@ describe('Testes unitários de Product Controller', function () {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
   });
+  describe('deletando um produto', function () {
+    it('Com id válido', async function () {
+      const res = {};
+      const req = {
+        params: { id: 1 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productService, 'deleteProduct')
+        .resolves({ type: null });
+      // act
+      await productController.deleteProduct(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(204);
+    });
+    it('Com id inexistente', async function () {
+      const res = {};
+      const req = {
+        params: { id: 999 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productService, 'deleteProduct')
+        .resolves({ type: 'PRODUCT_NOT_FOUND', message:'Product not found' });
+      // act
+      await productController.deleteProduct(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+    it('Com id inválido', async function () {
+      const res = {};
+      const req = {
+        params: { id: invalidValue },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productService, 'deleteProduct')
+        .resolves({ type: 'INVALID_VALUE', message: '"id" must be a number' });
+      // act
+      await productController.deleteProduct(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(422);
+      expect(res.json).to.have.been.calledWith({ message: '"id" must be a number' });
+    });  
+  });
   afterEach(function () {
     sinon.restore();
   });

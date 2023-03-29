@@ -107,6 +107,35 @@ describe('Testes Service Products', function () {
       expect(result.type).to.equal('PRODUCT_NOT_FOUND');
       expect(result.message).to.deep.equal('Product not found');
     });
+  });
+  describe('Deletando um produto', function () {
+    it('com Id válido', async function () {
+      // // arrange
+      sinon.stub(productModel, 'deleteProduct').resolves();
+      // // act
+      const result = await productService.deleteProduct(1);
+      console.log('#########################',result)
+      // // assert
+      expect(result.type).to.equal(null);
+    });
+    it('com Id inexistente', async function () {
+      // // arrange
+      sinon.stub(productModel, 'deleteProduct').resolves();
+      // // act
+      const result = await productService.deleteProduct(999);
+      // // assert
+      expect(result.type).to.equal('PRODUCT_NOT_FOUND');
+      expect(result.message).to.deep.equal('Product not found');
+    });
+      it('com Id inválido', async function () {
+      // // arrange
+      sinon.stub(productModel, 'deleteProduct').resolves();
+      // // act
+      const result = await productService.deleteProduct(invalidValue);
+      // // assert
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.message).to.deep.equal('"id" must be a number');
+    });
   })
   afterEach(function () {
     sinon.restore()
