@@ -94,7 +94,6 @@ describe('Testes Service Products', function () {
       sinon.stub(productModel, 'update').resolves();
       // act
       const result = await productService.updateProduct(invalidValue, 1);
-      console.log('#########################', result)
       // assert
       expect(result.type).to.equal('INVALID_VALUE');
       expect(result.message).to.deep.equal('"name" length must be at least 5 characters long');
