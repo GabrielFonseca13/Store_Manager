@@ -45,10 +45,16 @@ const itemsSoldWithoutQuantity = [
   }
 ];
 
+const salesListMock = [
+  { id: 1, date: '2023-03-29T00:16:37.000Z' },
+  { id: 2, date: '2023-03-29T00:16:37.000Z' }
+];
+
 module.exports = {
   newSaleId,
   itemsSold,
   expectedRetundNewSalePost,
   itemsSoldWithoutProductId,
-  itemsSoldWithoutQuantity
+  itemsSoldWithoutQuantity,
+  salesListMock
 }

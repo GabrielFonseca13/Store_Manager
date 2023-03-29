@@ -4,7 +4,7 @@ const validateHasQuantity = require('../../../src/middlewares/validateHasQuantit
 const { salesProductsModel, salesModel, productModel } = require('../../../src/models');
 
 const { salesService } = require('../../../src/services');
-const { expectedReturnNewSalePost, itemsSold, productList, itemsSoldWithWrongId,  } = require('./mocks/sales.service.mock');
+const { expectedReturnNewSalePost, itemsSold, productList, itemsSoldWithWrongId, salesListMock, responseId,  } = require('./mocks/sales.service.mock');
 
 describe('Testando a service de Sales', function () {
   describe('Cadastrando uma nova venda com dados válidos', function () {
@@ -42,10 +42,6 @@ describe('Testando a service de Sales', function () {
       expect(result.message).to.deep.equal('Product not found');
     });
   });
-  describe('Verificando middleware validateHasQuantity', function () {
-  beforeEach(function () {
-    sinon.restore()
-  });
   describe('Cadastrando uma nova venda faltando dados obrigatórios', function () {
     it('Cadastrando sem quantity retorna o status 400 e a mensagem quantity is required', async function () {
       const res = {};
@@ -66,8 +62,18 @@ describe('Testando a service de Sales', function () {
       expect(res.json).to.have.been.calledWith({ "message": '"quantity" is required' });
     });
   });
-});
-
+  describe('Listando as vendas', function () {
+    it('retorna a lista con todas as vendas', async function () {
+      // arrange
+      // act
+      // assert
+    });
+       it('Buscando uma venda atraves de id válido', async function () {
+      // arrange
+      // act      
+      // assert
+    });
+  });
   afterEach(function () {
     sinon.restore();
   });
