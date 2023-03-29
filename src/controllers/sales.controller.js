@@ -10,25 +10,25 @@ const insertNewSale = async (req, res) => {
   return res.status(201).json(message);
 };
 
-// const listSales = async (_req, res) => {
-//   const { message } = await salesService.findAll();
+const getAllDetailedSales = async (_req, res) => {
+  const { message } = await salesService.getAllDetailedSales();
 
-//   // if (type) return res.status(errorMap.mapError(type)).json(message);
+  // if (type) return res.status(errorMap.mapError(type)).json(message);
 
-//   return res.status(200).json(message);
-// };
+  return res.status(200).json(message);
+};
 
-// const getSaleById = async (req, res) => {
-//   const { id } = req.params;
-//   const { type, message } = await salesService.findById(id);
+const getDetailedSalesById = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await salesService.getDetailedSalesById(id);
 
-//   if (type) return res.status(errorMap.mapError(type)).json({ message });
+  if (type) return res.status(errorMap.mapError(type)).json({ message });
 
-//   return res.status(200).json(message);
-// };
+  return res.status(200).json(message);
+};
 
 module.exports = {
   insertNewSale,
-  // listSales,
-  // getSaleById,
+  getAllDetailedSales,
+  getDetailedSalesById,
 };

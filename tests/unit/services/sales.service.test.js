@@ -73,12 +73,11 @@ describe('Testando a service de Sales', function () {
       expect(result.type).to.equal(null);
       expect(result.message).to.deep.equal(allSalesMock);
     });
-       it.only('Buscando uma venda atraves de id válido', async function () {
+       it('Buscando uma venda atraves de id válido', async function () {
          // arrange
-         sinon.stub(salesModel, 'getDetailedSalesByid').resolves(expectedResponseSaleById);
+         sinon.stub(salesModel, 'getDetailedSalesById').resolves(expectedResponseSaleById);
          // act      
-         const result = await salesService.getDetailedSalesByid(1);
-         console.log('#######################################################', result);
+         const result = await salesService.getDetailedSalesById(1);
          // assert
          expect(result.type).to.equal(null);
          expect(result.message).to.deep.equal(expectedResponseSaleById);

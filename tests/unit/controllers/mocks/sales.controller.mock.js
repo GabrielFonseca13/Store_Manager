@@ -45,9 +45,40 @@ const itemsSoldWithoutQuantity = [
   }
 ];
 
-const salesListMock = [
-  { id: 1, date: '2023-03-29T00:16:37.000Z' },
-  { id: 2, date: '2023-03-29T00:16:37.000Z' }
+const allSalesMock = [
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 1,
+      quantity: 5
+    },
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 2,
+      quantity: 10
+    },
+    {
+      saleId: 2,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 3,
+      quantity: 15
+    }
+  ];
+
+const expectedResponseSaleById = [
+  {
+    saleId: 1,
+    date: '2023-03-28T22:04:18.000Z',
+    productId: 1,
+    quantity: 5
+  },
+  {
+    saleId: 1,
+    date: '2023-03-28T22:04:18.000Z',
+    productId: 2,
+    quantity: 10
+  },
 ];
 
 module.exports = {
@@ -56,5 +87,6 @@ module.exports = {
   expectedRetundNewSalePost,
   itemsSoldWithoutProductId,
   itemsSoldWithoutQuantity,
-  salesListMock
+  allSalesMock,
+  expectedResponseSaleById
 }

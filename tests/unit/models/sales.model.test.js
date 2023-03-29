@@ -30,7 +30,7 @@ describe('Testes da Sales Model', () => {
       sinon.stub(connection, 'execute').resolves([expectedResposeGetSaleById])
       
       // act
-      const result = await salesModel.getDetailedSalesByid(1);
+      const result = await salesModel.getDetailedSalesById(1);
       
       // assert
       expect(result).to.deep.equal(expectedResposeGetSaleById);

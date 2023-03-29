@@ -21,7 +21,7 @@ const getDetailedSales = async () => {
   return camelize(result);
 };
 
-const getDetailedSalesByid = async (id) => {
+const getDetailedSalesById = async (id) => {
   const [result] = await connection.execute(`
     SELECT SP.sale_id AS "saleId", 
       S.date AS "date", 
@@ -38,5 +38,5 @@ const getDetailedSalesByid = async (id) => {
 module.exports = {
   insert,
   getDetailedSales,
-  getDetailedSalesByid,
+  getDetailedSalesById,
 };

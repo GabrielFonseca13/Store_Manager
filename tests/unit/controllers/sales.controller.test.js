@@ -5,7 +5,7 @@ const { salesController } = require('../../../src/controllers');
 const validateHasProductId = require('../../../src/middlewares/validateHasProductId');
 const validateQuantity = require('../../../src/middlewares/validateQuantity');
 const { salesService } = require('../../../src/services');
-const { itemsSold, expectedRetundNewSalePost, itemsSoldWithoutProductId, salesListMock } = require('./mocks/sales.controller.mock');
+const { itemsSold, expectedRetundNewSalePost, itemsSoldWithoutProductId, allSalesMock, expectedResponseSaleById } = require('./mocks/sales.controller.mock');
 const { expect } = chai;
 chai.use(sinonChai);
 
@@ -72,39 +72,39 @@ describe('Testes Sales Controller', function () {
       });
   });
   describe('Listando as vendas', function () {
-    it('Deve retornar o status 200 e a lista de vendas com horario', async function () {
-      // // arrange
-      // const res = {};
-      // const req = {};
+    it('Deve retornar o status 200 e a lista com todas as vendas', async function () {
+      // arrange
+      const res = {};
+      const req = {};
 
-      // res.status = sinon.stub().returns(res);
-      // res.json = sinon.stub().returns();
-      // sinon
-      //   .stub(salesService, 'findAll')
-      //   .resolves({ type: null, message: salesListMock });
-      // // act
-      // await salesController.listSales(req, res);
-      // // assert
-      // expect(res.status).to.have.been.calledWith(200);
-      // expect(res.json).to.have.been.calledWith(salesListMock);
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(salesService, 'getAllDetailedSales')
+        .resolves({ type: null, message: allSalesMock });
+      // act
+      await salesController.getAllDetailedSales(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(allSalesMock);
     });
-    it('Busca uma venda pelo seu id', async function () {
-      // // arrange
-      // const res = {};
-      // const req = {
-      //   params: { id: 1 }
-      // }
+    it.only('Busca uma venda pelo seu id', async function () {
+      // arrange
+      const res = {};
+      const req = {
+        params: { id: 1 }
+      };
 
-      // res.status = sinon.stub().returns(res);
-      // res.json = sinon.stub().returns();
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-      // sinon.stub(salesService, 'findById')
-      //   .resolves({ type: null, message: salesListMock[0] });
-      // // act
-      // await salesController.getSaleById(req, res);
-      // // assert
-      // expect(res.status).to.have.been.calledWith(200);
-      // expect(res.json).to.have.been.calledWith(salesListMock[0]);
+      sinon.stub(salesService, 'getDetailedSalesById')
+        .resolves({ type: null, message: expectedResponseSaleById });
+      // act
+      await salesController.getDetailedSalesById(req, res);
+      // assert
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(expectedResponseSaleById);
     });
   });
   

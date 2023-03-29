@@ -12,7 +12,7 @@ router.post('/',
   validateQuantity,
   salesController.insertNewSale);
 
-// router.get('/', salesController.listSales);
+router.get('/', salesController.getAllDetailedSales);
 
 // router.get('/:id', salesController.getSaleById);
 

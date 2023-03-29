@@ -28,11 +28,11 @@ const getAllDetailedSales = async () => {
   return { type: null, message: sales };
 };
 
-const getDetailedSalesByid = async (saleId) => {
+const getDetailedSalesById = async (saleId) => {
   const error = schema.validateId(saleId);
   if (error.type) return error;
 
-  const sale = await salesModel.getDetailedSalesByid(saleId);
+  const sale = await salesModel.getDetailedSalesById(saleId);
 
   if (!sale) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
 
@@ -42,5 +42,5 @@ const getDetailedSalesByid = async (saleId) => {
 module.exports = {
   newSalePost,
   getAllDetailedSales,
-  getDetailedSalesByid,
+  getDetailedSalesById,
 };
