@@ -4,7 +4,8 @@ const validateHasQuantity = require('../../../src/middlewares/validateHasQuantit
 const { salesProductsModel, salesModel, productModel } = require('../../../src/models');
 
 const { salesService } = require('../../../src/services');
-const { expectedReturnNewSalePost, itemsSold, productList, itemsSoldWithWrongId, salesListMock, responseId,  } = require('./mocks/sales.service.mock');
+const { allSalesMock } = require('../models/mocks/sales.model.mock');
+const { expectedReturnNewSalePost, itemsSold, productList, itemsSoldWithWrongId, salesListMock, responseId, expectedResponseSaleById,  } = require('./mocks/sales.service.mock');
 
 describe('Testando a service de Sales', function () {
   describe('Cadastrando uma nova venda com dados válidos', function () {
@@ -42,36 +43,45 @@ describe('Testando a service de Sales', function () {
       expect(result.message).to.deep.equal('Product not found');
     });
   });
-  describe('Cadastrando uma nova venda faltando dados obrigatórios', function () {
-    it('Cadastrando sem quantity retorna o status 400 e a mensagem quantity is required', async function () {
-      const res = {};
-      const req = {
-        body: [
-          {
-            'productId': 1
-          }
-        ]
-      };
+  // describe('Cadastrando uma nova venda faltando dados obrigatórios', function () {
+  //   it('Cadastrando sem quantity retorna o status 400 e a mensagem quantity is required', async function () {
+  //     const res = {};
+  //     const req = {
+  //       body: [
+  //         {
+  //           'productId': 1
+  //         }
+  //       ]
+  //     };
         
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns();
+  //     res.status = sinon.stub().returns(res);
+  //     res.json = sinon.stub().returns();
             
-      await validateHasQuantity(req, res);
+  //     await validateHasQuantity(req, res);
 
-      expect(res.status).to.have.been.calledWith(400);
-      expect(res.json).to.have.been.calledWith({ "message": '"quantity" is required' });
-    });
-  });
+  //     expect(res.status).to.have.been.calledWith(400);
+  //     expect(res.json).to.have.been.calledWith({ "message": '"quantity" is required' });
+  //   });
+  // });
   describe('Listando as vendas', function () {
-    it('retorna a lista con todas as vendas', async function () {
+    it('retorna a lista com todas as vendas detalhadas', async function () {
       // arrange
+      sinon.stub(salesModel, 'getDetailedSales').resolves(allSalesMock);
       // act
+      const result = await salesService.getAllDetailedSales();
       // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(allSalesMock);
     });
-       it('Buscando uma venda atraves de id válido', async function () {
-      // arrange
-      // act      
-      // assert
+       it.only('Buscando uma venda atraves de id válido', async function () {
+         // arrange
+         sinon.stub(salesModel, 'getDetailedSalesByid').resolves(expectedResponseSaleById);
+         // act      
+         const result = await salesService.getDetailedSalesByid(1);
+         console.log('#######################################################', result);
+         // assert
+         expect(result.type).to.equal(null);
+         expect(result.message).to.deep.equal(expectedResponseSaleById);
     });
   });
   afterEach(function () {

@@ -25,7 +25,7 @@ describe('Testes da Sales Model', () => {
       // assert
       expect(result).to.deep.equal(allSalesMock)
     });
-    it.only('retorna um array com todas os produtos e quantidades da venda, atraves do seu id', async function () {
+    it('retorna um array com todas os produtos e quantidades da venda, atraves do seu id', async function () {
       // arrange
       sinon.stub(connection, 'execute').resolves([expectedResposeGetSaleById])
       

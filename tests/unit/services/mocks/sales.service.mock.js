@@ -39,11 +39,40 @@ const itemsSoldWithWrongId = [
 ];
 
 const salesListMock = [
-  { id: 1, date: '2023-03-29T00:16:37.000Z' },
-  { id: 2, date: '2023-03-29T00:16:37.000Z' }
-];
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 1,
+      quantity: 5
+    },
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 2,
+      quantity: 10
+    },
+    {
+      saleId: 2,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 3,
+      quantity: 15
+    }
+  ];
 
-const responseId = { id: 1, date: '2023-03-29T00:38:36.000Z' }
+const expectedResponseSaleById = [
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 1,
+      quantity: 5
+    },
+    {
+      saleId: 1,
+      date: '2023-03-29T01:04:18.000Z',
+      productId: 2,
+      quantity: 10
+    }
+  ]
 
 module.exports = {
   newSaleId,
@@ -52,6 +81,6 @@ module.exports = {
   productList,
   itemsSoldWithWrongId,
   salesListMock,
-  responseId
+  expectedResponseSaleById
 }
 

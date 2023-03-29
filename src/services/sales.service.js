@@ -1,6 +1,6 @@
 const { salesModel, salesProductsModel } = require('../models');
 const { validateProductExists } = require('./validations/validationsInputs');
-// const schema = require('./validations/validationsInputs');
+const schema = require('./validations/validationsInputs');
 
 const newSalePost = async (salesProducts) => {
   const error = await validateProductExists(salesProducts);
@@ -23,29 +23,24 @@ const newSalePost = async (salesProducts) => {
   return { type: null, message: response };
 };
 
-// const findAll = async () => {
-//   const sales = await salesModel.findAll();
-//   return { type: null, message: sales };
-// };
+const getAllDetailedSales = async () => {
+  const sales = await salesModel.getDetailedSales();
+  return { type: null, message: sales };
+};
 
-// const findById = async (saleId) => {
-//   const error = schema.validateId(saleId);
-//   if (error.type) return error;
+const getDetailedSalesByid = async (saleId) => {
+  const error = schema.validateId(saleId);
+  if (error.type) return error;
 
-//   const sale = await salesModel.findById(saleId);
+  const sale = await salesModel.getDetailedSalesByid(saleId);
 
-//   if (!sale) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  if (!sale) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
 
-//   return { type: null, message: sale };
-// };
-
-// const getAllDetailedSales = async (saleId) => {
-//   const error = schema.validateId(saleId);
-//   if (error.type) return error;
-// };
+  return { type: null, message: sale };
+};
 
 module.exports = {
   newSalePost,
-  // findAll,
-  // findById,
+  getAllDetailedSales,
+  getDetailedSalesByid,
 };
